@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./DjangoMongo:/code  # Указываем путь до DjangoMongo, где находится manage.py
+    environment:
+      - DJANGO_SETTINGS_MODULE=DjangoMongo.settings
+      - MONGO_DB_URI=mongodb+srv://mongo_db:mango_db_password@cluster0.veqwiqm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+networks:
+  default:
+    driver: bridge
